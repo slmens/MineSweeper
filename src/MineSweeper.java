@@ -44,22 +44,21 @@ public class MineSweeper {
                         map[rand1][rand2] = " * ";
                 }
 
-                for (int p = 0; p < map.length; p++){
-                        for (int a = 0; a < map[p].length; a++){
-                                System.out.print(board[p][a] + " ");
-                        }
-                        System.out.println();
-                }
+                System.out.println("Your game is ready!");
+                System.out.println();
+                printMethod(board);
         }
 
 
         void run(){
                 do {
                         // First we get the coordinates from the user. User can enter a number between 1 and row/column number that user entered in the Main class.
+                        System.out.println();
                         System.out.printf("Please give a row number between 1 and %s : ",row);
                         pseudoRow = scan.nextInt();
                         System.out.printf("Please give a column number between 1 and %s : ",col);
                         pseudoCol = scan.nextInt();
+                        System.out.println();
 
                         // Then we subtract 1 from these numbers because even if we ask the user to start from 1 so that the user does not get confused and does not start from 0, our array starts from 0.
                         // That is, in a 4 by 4 array, if the user enters 1, it becomes array[0], and if the user enters 4, it becomes array[3].
@@ -68,9 +67,10 @@ public class MineSweeper {
 
                         // We control the numbers that user gave, if they are in the range of 1 and top limit (row/column).
                         if ((pseudoRow >= 0 && pseudoRow < row) && (pseudoCol >= 0 && pseudoCol < col)){
-                                if (Objects.equals(map[pseudoRow][pseudoCol], " * ")){
+                                if (hasLandedOnMine(pseudoRow,pseudoCol)){
                                         // We are checking the coordinates given by the user in the map array because the location of the mines is recorded there.
-                                        // If there is a " * " character in the coordinates given by the user, it means that he stepped on a mine, so we finish the game.
+                                        // If there is a " * " character in the coordinates given by the user, it means that he stepped on a mine, so hasLandedOnMine
+                                        // method return true,and we finish the game.
                                         System.out.println("You landed on a mine...");
                                         System.out.println();
 
@@ -151,6 +151,12 @@ public class MineSweeper {
                         }
 
                 }while (notFinished);
+        }
+
+        // This is a simple method that check if the coordinates that we are taken from the user is == "*"
+        // If so return true and finish the game
+        boolean hasLandedOnMine(int row,int col){
+            return Objects.equals(map[row][col], " * ");
         }
 
         /*
