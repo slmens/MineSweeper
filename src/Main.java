@@ -19,12 +19,15 @@ public class Main {
                 System.out.println("Too many attempts. System closing...");
                 System.exit(0);
             }
+            // I set a limit on the number of rows and columns, and if a number between 100 and 2 is not entered, it asks you to enter it again. And if you enter a number outside of limits
+            // for 5 times, then system closes itself.
         }while ((row > 100 || row < 2) || (col > 100 || col < 2));
 
         System.out.println("Thank you, I'm preparing your game...");
         System.out.println();
         Thread.sleep(2000);
 
+        // I created my object from MineSweeper class. And run the run method.
         MineSweeper mine = new MineSweeper(row,col);
         mine.run();
     }
