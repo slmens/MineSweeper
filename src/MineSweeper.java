@@ -137,8 +137,10 @@ public class MineSweeper {
                                 // We are checking to see if the game is over by hasFinished method (read the comments above the hasFinished method) before the while loop ends.
                                 // If it returns true, the game is over; if it returns false, we continue the while loop.
                                 if (hasFinished(board,map)){
+                                        System.out.println();
                                         System.out.println("You Won! You found all the clear areas!");
                                         System.out.println("Here is the map of the mines");
+                                        System.out.println();
 
                                         printMethod(map);
 

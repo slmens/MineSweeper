@@ -6,7 +6,7 @@ public class Main {
         int row,col,count = 0;
 
         System.out.println("---------------Welcome to minesweeper game---------------");
-        System.out.println("Please give me the number of row number and column number that you desire between 2 and 100. The loop will continue to ask you row and column number until you enter a number between 2 and 100..." );
+        System.out.println("Please give me the number of row number and column number that you desire between 2 and 100.  \nThe loop will continue to ask you row and column number until you enter a number between 2 and 100..." );
 
         do {
             System.out.print("Row count: ");
