@@ -2,7 +2,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.Random;
 
-// yapılacaklar: Güzelleştir, kod tekrarından kurtul metod yapabilidklerini metod yap/ puan kontrolü
+// Değerlendirme formu : 1
 
 public class MineSweeper {
         Random random = new Random();
@@ -14,7 +14,8 @@ public class MineSweeper {
         MineSweeper(int row,int col){
                 this.row = row;
                 this.col = col;
-                mineCount = (row * col) / 4;
+                mineCount = (row * col) / 4; // Değerlendirme formu : 4
+                System.out.println(mineCount);
                 board = new String[row][col];
                 map = new String[row][col];
 
@@ -36,23 +37,32 @@ public class MineSweeper {
                         }
                 }
 
+                // Değerlendirme formu : 4
                 for (int t = 0; t < this.mineCount; t++ ){
                         int rand1,rand2;
                         rand1 = random.nextInt(row);
                         rand2 = random.nextInt(col);
 
+                        if (Objects.equals(map[rand1][rand2], " * ")){
+                                t--;
+                                continue;
+                        }
+
                         map[rand1][rand2] = " * ";
                 }
-
+                System.out.println("Here is your map for mines!");
+                printMethod(map);
+                System.out.println();
                 System.out.println("Your game is ready!");
                 System.out.println();
                 printMethod(board);
         }
 
-
+        // Değerlendirme formu : 2
         void run(){
                 do {
                         // First we get the coordinates from the user. User can enter a number between 1 and row/column number that user entered in the Main class.
+                        // Değerlendirme formu : 5
                         System.out.println();
                         System.out.printf("Please give a row number between 1 and %s : ",row);
                         pseudoRow = scan.nextInt();
@@ -66,12 +76,13 @@ public class MineSweeper {
                         pseudoCol -= 1;
 
                         // We control the numbers that user gave, if they are in the range of 1 and top limit (row/column).
+                        // Değerlendirme formu : 6
                         if ((pseudoRow >= 0 && pseudoRow < row) && (pseudoCol >= 0 && pseudoCol < col)){
-                                if (hasLandedOnMine(pseudoRow,pseudoCol)){
+                                if (hasLandedOnMine(pseudoRow,pseudoCol)){ // Değerlendirme formu : 9
                                         // We are checking the coordinates given by the user in the map array because the location of the mines is recorded there.
                                         // If there is a " * " character in the coordinates given by the user, it means that he stepped on a mine, so hasLandedOnMine
                                         // method return true,and we finish the game.
-                                        System.out.println("You landed on a mine...");
+                                        System.out.println("You landed on a mine..."); // Değerlendirme formu : 11
                                         System.out.println();
 
                                         // Then we print out the map array to show the user where are the mines are.
@@ -131,12 +142,12 @@ public class MineSweeper {
                                         // Finally, we enter the coordinates given to us into our board array and set the region in that coordinate equal to the counter,
                                         // that is, the number of mines around that region.
                                         board[pseudoRow][pseudoCol] = String.format(" %s ",counter);
-
+                                        // Değerlendirme formu : 7,8
                                         printMethod(board);
                                 }
                                 // We are checking to see if the game is over by hasFinished method (read the comments above the hasFinished method) before the while loop ends.
                                 // If it returns true, the game is over; if it returns false, we continue the while loop.
-                                if (hasFinished(board,map)){
+                                if (hasFinished(board,map)){ // Değerlendirme formu : 11
                                         System.out.println();
                                         System.out.println("You Won! You found all the clear areas!");
                                         System.out.println("Here is the map of the mines");
@@ -147,7 +158,7 @@ public class MineSweeper {
                                         notFinished = false;
                                         System.exit(0);
                                 }
-                        }else {
+                        }else { // Değerlendirme formu : 6
                                 // If the input that I get from the user is beyond the limits, then I warn the user
                                 System.out.println("Please give numbers within the limits given to you!");
                         }
@@ -157,6 +168,7 @@ public class MineSweeper {
 
         // This is a simple method that check if the coordinates that we are taken from the user is == "*"
         // If so return true and finish the game
+        // Değerlendirme formu : 2
         boolean hasLandedOnMine(int row,int col){
             return Objects.equals(map[row][col], " * ");
         }
@@ -167,6 +179,7 @@ public class MineSweeper {
                 This means that there is no place on the board that can be opened that is not a mine, and it returns true.
         */
 
+        // Değerlendirme formu : 2,10
         boolean hasFinished(String[][] arr,String[][] map){
                 int pseudoMineCount = 0,newMineCount = 0;
                 for (int j = 0; j < arr.length; j++){
